@@ -339,6 +339,14 @@ section {
     line-height: 1.7;
 }
 
+.hero-tagline {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
 .hero-actions {
     display: flex;
     gap: 16px;
@@ -392,6 +400,22 @@ section {
 /* ==========================================================================
    CSS PANCO BOARD MOCKUP (INTERACTIVE)
    ========================================================================== */
+.hero-img-file {
+    width: 100%;
+    max-width: 440px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    object-fit: cover;
+    display: none; /* Hidden by default, shown when loaded */
+    transition: var(--transition-smooth);
+}
+
+.hero-img-file:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+}
+
 .panco-mockup-card {
     background: #ffffff;
     border: 1px solid rgba(226, 232, 240, 0.8);

@@ -55,15 +55,18 @@
                 <div class="hero-content">
                     <span class="badge">Inovasi Aktivitas Lansia</span>
                     <h1 class="hero-title">Papan Ronce <span class="highlight-text">3D</span></h1>
-                    <p class="hero-subtitle">Meronce Bersama, Buat Interaksi Lebih Bermakna</p>
+                    <p class="hero-tagline">Meronce Bersama, Buat Interaksi Lebih Bermakna</p>
+                    <p class="hero-subtitle">Media aktivitas motorik dan kognitif dua sisi yang dirancang khusus untuk lansia agar tetap aktif, sehat, dan bersosialisasi dengan menyenangkan.</p>
                     <div class="hero-actions">
                         <a href="#about" class="btn btn-primary">Lihat Produk</a>
                         <a href="#features" class="btn btn-secondary">Pelajari Fitur</a>
                     </div>
                 </div>
                 <div class="hero-visual">
+                    <!-- Loaded Hero Image if exists, falls back to Interactive CSS Mockup -->
+                    <img src="assets/hero.png" alt="Papan Ronce 3D" class="hero-img-file" id="hero-img-file" onload="this.style.display='block'; document.getElementById('css-mockup').style.display='none';" onerror="this.style.display='none'; document.getElementById('css-mockup').style.display='block';">
                     <!-- Clean Interactive CSS-based Mockup representing the PANCO activity board -->
-                    <div class="panco-mockup-card">
+                    <div id="css-mockup" class="panco-mockup-card">
                         <div class="mockup-frame">
                             <div class="mockup-header-bar">
                                 <div class="mockup-adjustable-pole-left">
