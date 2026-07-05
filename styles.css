@@ -6,6 +6,7 @@
     --bg-primary: #ffffff;
     --bg-secondary: #f0f9ff; /* Light blue tint */
     --bg-green-tint: #f0fdf4; /* Light green tint */
+    --bg-card: #ffffff;
     
     --primary: #0284c7; /* Friendly medium blue */
     --primary-hover: #0369a1;
@@ -48,9 +49,10 @@
    DARK MODE COLORS
    ========================================================================== */
 [data-theme="dark"] {
-    --bg-primary: #0f172a; /* Slate 900 */
-    --bg-secondary: #1e293b; /* Slate 800 */
-    --bg-green-tint: #064e3b; /* Dark Green Tint */
+    --bg-primary: #0b0f19; /* Deep Slate Navy */
+    --bg-secondary: #162032; /* Darker Slate Navy for inset elements */
+    --bg-card: #1e293b; /* Slate 800 for card containers */
+    --bg-green-tint: #082f1d; /* Dark Forest Green */
     
     --primary: #38bdf8; /* Soft blue */
     --primary-hover: #0ea5e9;
@@ -71,6 +73,20 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
     --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* Dark Mode Background Overrides */
+[data-theme="dark"] .hero-section {
+    background: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, rgba(11, 15, 25, 1) 90%);
+}
+
+[data-theme="dark"] .navbar-header {
+    background-color: rgba(11, 15, 25, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .navbar-header.scrolled {
+    background-color: rgba(11, 15, 25, 0.95);
 }
 
 /* Smooth Transitions for Theme Swapping */
@@ -525,8 +541,8 @@ section {
 }
 
 .panco-mockup-card {
-    background: #ffffff;
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 30px;
     box-shadow: var(--shadow-lg);
@@ -541,7 +557,7 @@ section {
 }
 
 .mockup-frame {
-    background: #f8fafc;
+    background: var(--bg-secondary);
     border: 8px solid #d97706; /* Wooden border look */
     border-radius: var(--radius-md);
     padding: 16px;
@@ -764,11 +780,11 @@ section {
 }
 
 .about-card {
-    background: #ffffff;
+    background: var(--bg-card);
     border-radius: var(--radius-lg);
     padding: 60px 48px;
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
 }
@@ -823,8 +839,8 @@ section {
 }
 
 .feature-card {
-    background-color: #ffffff;
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 36px 30px;
     box-shadow: var(--shadow-sm);
@@ -901,8 +917,8 @@ section {
 }
 
 .benefit-card {
-    background: #ffffff;
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 36px;
     box-shadow: var(--shadow-sm);
@@ -958,7 +974,7 @@ section {
    GALLERY SECTION
    ========================================================================== */
 .gallery-section {
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
 }
 
 .gallery-grid {
@@ -1083,13 +1099,13 @@ section {
 }
 
 .about-us-card {
-    background: #ffffff;
+    background: var(--bg-card);
     border-radius: var(--radius-lg);
     padding: 48px;
     max-width: 800px;
     margin: 0 auto;
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid var(--border-color);
     position: relative;
     text-align: center;
 }
@@ -1128,12 +1144,12 @@ section {
    CONTACT SECTION
    ========================================================================== */
 .contact-section {
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
 }
 
 .contact-card {
-    background: #ffffff;
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     max-width: 900px;
@@ -1167,7 +1183,7 @@ section {
     transform: translateY(-4px);
     border-color: var(--primary-light);
     box-shadow: var(--shadow-sm);
-    background-color: #ffffff;
+    background-color: var(--bg-card);
 }
 
 .contact-item:nth-child(even) {
@@ -1225,7 +1241,7 @@ section {
 .main-footer {
     padding: 40px 0;
     border-top: 1px solid var(--border-color);
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
     text-align: center;
 }
 
@@ -1419,6 +1435,20 @@ section {
     .contact-grid {
         grid-template-columns: 1fr;
     }
+    
+    .contact-card {
+        padding: 24px;
+    }
+    
+    .contact-item {
+        padding: 16px;
+        gap: 12px;
+    }
+    
+    .contact-value {
+        word-break: break-all;
+        overflow-wrap: anywhere;
+    }
 
     /* MOBILE NAVIGATION TOGGLE */
     .menu-toggle {
@@ -1526,6 +1556,20 @@ section {
     
     .about-card {
         padding: 30px 24px;
+    }
+    
+    /* Contact Card mobile padding adjustment */
+    .contact-card {
+        padding: 16px;
+    }
+    
+    .contact-item {
+        padding: 12px 14px;
+        gap: 10px;
+    }
+    
+    .contact-value {
+        font-size: 0.9rem;
     }
     
     /* Mockup adjustments on tiny screens */
