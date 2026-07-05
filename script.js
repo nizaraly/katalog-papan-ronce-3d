@@ -21,22 +21,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
+    const navOverlay = document.getElementById('nav-overlay');
     const navLinks = document.querySelectorAll('.nav-link');
     
     const toggleMenu = () => {
-        menuToggle.classList.toggle('active');
+        const isActive = menuToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
+        navOverlay.classList.toggle('active');
         // Prevent body scroll when menu is active on mobile
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        document.body.style.overflow = isActive ? 'hidden' : '';
     };
     
     const closeMenu = () => {
         menuToggle.classList.remove('active');
         navMenu.classList.remove('active');
+        navOverlay.classList.remove('active');
         document.body.style.overflow = '';
     };
     
     menuToggle.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', closeMenu);
     
     // Close menu when a link is clicked
     navLinks.forEach(link => {
@@ -47,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (navMenu.classList.contains('active') && 
             !navMenu.contains(e.target) && 
-            !menuToggle.contains(e.target)) {
+            !menuToggle.contains(e.target) &&
+            !navOverlay.contains(e.target)) {
             closeMenu();
         }
     });
@@ -65,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const randomPercent = Math.floor(Math.random() * 60) + 20; // range 20% to 80%
             bead.style.left = `${randomPercent}%`;
             
-            // Add a temporary pop animation
-            bead.style.transform = 'scale(1.4) translateY(-8px)';
+            // Add a temporary pop and rotate animation
+            bead.style.transform = 'scale(1.35) rotate(15deg) translateY(-8px)';
             
             // Trigger feedback in the label
             if (activeLabel) {
@@ -212,5 +217,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
             closeLightbox();
         }
+    });
+
+    // ==========================================================================
+    // 7. DARK MODE THEME TOGGLE
+    // ==========================================================================
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Get stored theme or default to light / OS preference
+    const getPreferredTheme = () => {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            return storedTheme;
+        }
+        // Fallback to system OS preference
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    
+    const setTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    };
+    
+    // Set initial theme
+    const initialTheme = getPreferredTheme();
+    setTheme(initialTheme);
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
     });
 });

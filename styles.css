@@ -45,6 +45,112 @@
 }
 
 /* ==========================================================================
+   DARK MODE COLORS
+   ========================================================================== */
+[data-theme="dark"] {
+    --bg-primary: #0f172a; /* Slate 900 */
+    --bg-secondary: #1e293b; /* Slate 800 */
+    --bg-green-tint: #064e3b; /* Dark Green Tint */
+    
+    --primary: #38bdf8; /* Soft blue */
+    --primary-hover: #0ea5e9;
+    --primary-light: rgba(56, 189, 248, 0.15);
+    
+    --secondary: #4ade80; /* Soft green */
+    --secondary-hover: #22c55e;
+    --secondary-light: rgba(74, 222, 128, 0.15);
+    
+    --text-dark: #f8fafc; /* Slate 50 */
+    --text-medium: #cbd5e1; /* Slate 300 */
+    --text-light: #94a3b8; /* Slate 400 */
+    --text-muted: #64748b; /* Slate 500 */
+    
+    --border-color: #334155; /* Slate 700 */
+    --border-hover: #475569;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth Transitions for Theme Swapping */
+body, .navbar-header, section, .about-card, .feature-card, .benefit-card, .contact-item, .panco-mockup-card, .mockup-frame, .mockup-board-surface, .logo, .nav-link, .btn, .theme-toggle, .gallery-overlay, .about-us-card {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON
+   ========================================================================== */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.08);
+    box-shadow: var(--shadow-sm);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Toggle visibility of icons based on theme status */
+[data-theme="light"] .sun-icon { display: none; }
+[data-theme="light"] .moon-icon { display: block; }
+[data-theme="dark"] .sun-icon { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
+
+[data-theme="dark"] .theme-toggle {
+    background-color: var(--secondary-light);
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background-color: var(--secondary-hover);
+    color: #ffffff;
+}
+
+/* Mobile Menu Backdrop Overlay */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ==========================================================================
    RESET & BASE STYLES
    ========================================================================== */
 *, *::before, *::after {
@@ -934,14 +1040,24 @@ section {
     left: 0;
     width: 100%;
     padding: 24px;
-    background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.5) 60%, transparent 100%);
     color: #ffffff;
     z-index: 3;
     opacity: 0;
+    transition: var(--transition-smooth);
 }
 
-/* Hover effects */
-/* Hover effects removed */
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-item .gallery-img {
+    transition: var(--transition-smooth);
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+}
 
 .overlay-category {
     font-size: 0.75rem;
@@ -1273,7 +1389,17 @@ section {
     }
     
     .panco-mockup-card {
-        max-width: 380px;
+        max-width: 100%;
+        padding: 20px;
+    }
+    
+    .mockup-frame {
+        border-width: 6px;
+        padding: 12px;
+    }
+    
+    .mockup-board-surface {
+        height: 160px;
     }
     
     .about-info {
@@ -1297,6 +1423,37 @@ section {
     /* MOBILE NAVIGATION TOGGLE */
     .menu-toggle {
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-full);
+        background-color: var(--primary-light);
+        padding: 12px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition-smooth);
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+
+    .menu-toggle:hover {
+        transform: scale(1.05);
+    }
+
+    [data-theme="dark"] .menu-toggle {
+        background-color: var(--secondary-light);
+    }
+
+    .menu-toggle .bar {
+        height: 2px;
+        width: 100%;
+        background-color: var(--primary);
+        border-radius: 9px;
+        transition: var(--transition-smooth);
+    }
+
+    [data-theme="dark"] .menu-toggle .bar {
+        background-color: var(--secondary);
     }
 
     .nav-menu {
@@ -1306,11 +1463,20 @@ section {
         width: 80%;
         max-width: 300px;
         height: 100vh;
-        background-color: #ffffff;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: -15px 0 40px rgba(15, 23, 42, 0.15);
         z-index: 999;
         transition: var(--transition-smooth);
         padding: 100px 40px;
+        border-left: 1px solid rgba(226, 232, 240, 0.3);
+    }
+
+    [data-theme="dark"] .nav-menu {
+        background-color: rgba(19, 27, 46, 0.85);
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.4);
     }
 
     .nav-menu.active {
@@ -1326,9 +1492,9 @@ section {
         font-size: 1.15rem;
     }
     
-    /* Hamburger Transform to X */
+    /* Hamburger Transform to X inside the circle container */
     .menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
     }
     
     .menu-toggle.active .bar:nth-child(2) {
@@ -1336,7 +1502,7 @@ section {
     }
     
     .menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-7px) rotate(-45deg);
     }
 }
 
@@ -1360,5 +1526,39 @@ section {
     
     .about-card {
         padding: 30px 24px;
+    }
+    
+    /* Mockup adjustments on tiny screens */
+    .panco-mockup-card {
+        padding: 16px;
+    }
+    
+    .mockup-frame {
+        border-width: 5px;
+        padding: 8px;
+    }
+    
+    .mockup-board-surface {
+        height: 130px;
+    }
+    
+    .mockup-bead {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .mockup-adjustable-pole-left,
+    .mockup-adjustable-pole-right {
+        width: 10px;
+        height: 45px;
+        top: -15px;
+    }
+    
+    .mockup-adjustable-pole-left { left: 10px; }
+    .mockup-adjustable-pole-right { right: 10px; }
+    
+    .mockup-string-line {
+        left: 15px;
+        right: 15px;
     }
 }
