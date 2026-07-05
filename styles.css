@@ -403,10 +403,12 @@ section {
 .hero-img-file {
     width: 100%;
     max-width: 440px;
+    aspect-ratio: 440 / 380;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(226, 232, 240, 0.8);
     object-fit: cover;
+    background-color: #ffffff;
     display: none; /* Hidden by default, shown when loaded */
     transition: var(--transition-smooth);
 }
